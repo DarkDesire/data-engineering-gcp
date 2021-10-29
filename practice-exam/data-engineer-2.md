@@ -26,7 +26,7 @@ D. Store in Cloud Storage. Link data as permanent tables in BigQuery and turn on
 **Not D.** Use Storage Transfer Service. Transfer to a Cloud Storage Coldline bucket.
 
 ---
-**C-D.** This is not correct because you should only use Transfer Service for a one-time one-way transfer. Also, Storage Transfer Service does not work for data stored on-premises.
+**Not C-D.** This is not correct because you should only use Transfer Service for a one-time one-way transfer. Also, Storage Transfer Service does not work for data stored on-premises.
 
 ---
 > **Q. Cost-effective backup to Google Cloud of multi-TB databases from another cloud including monthly DR drills.**
@@ -40,7 +40,7 @@ B. Use Transfer Appliance. Transfer to Cloud Storage Coldline bucket.
 **Not D.** Use Storage Transfer Service. Transfer to Cloud Storage Coldline bucket.
 
 ---
-**D**. This is not correct because you should not use Coldline if you want to access the files monthly.
+**Not D**. This is not correct because you should not use Coldline if you want to access the files monthly.
 
 ---
 > **Q. 250,000 devices produce a JSON device status every 10 seconds. How do you capture event data for outlier time series analysis?**
@@ -77,7 +77,7 @@ A. BigQuery
 
 B. Dataflow
 
-C. Dataproc
+**C.** Dataproc
 
 D. Dataprep
 
@@ -96,7 +96,7 @@ C. Use a Google Kubernetes Engine cluster to host your model. Monitor the status
 D. Use a Google Kubernetes Engine cluster to host your model. Monitor the status of the Operation object for 'error' results.
 
 ---
-**A.**  This is not correct because you should not use the Operation object to monitor failures.
+**Not A.**  This is not correct because you should not use the Operation object to monitor failures.
 
 ---
 
@@ -112,5 +112,89 @@ D. Set up a cluster in standard mode with the default machine types. Add 10 addi
 
 ---
 **Correct. C.** This is correct because Spark and high-memory machines only need the standard mode. Also, use preemptible nodes because you want to save money and this is not mission-critical.
+
+---
+> **Q. Promote a Cloud Bigtable solution with a lot of data from development to production and optimize for performance.**
+
+A. Change your Cloud Bigtable instance type from Development to Production, and set the number of nodes to at least 3. Verify that the storage type is HDD.
+
+B. Change your Cloud Bigtable instance type from Development to Production, and set the number of nodes to at least 3. Verify that the storage type is SSD.
+
+C. Export the data from your current Cloud Bigtable instance to Cloud Storage. Create a new Cloud Bigtable Production instance type with at least 3 nodes. Select the HDD storage type. Import the data into the new instance from Cloud Storage.
+
+**Not D.** Export the data from your current Cloud Bigtable instance to Cloud Storage. Create a new Cloud Bigtable Production instance type with at least 3 nodes. Select the SSD storage type. Import the data into the new instance from Cloud Storage.
+
+---
+**Not D.** This is not correct because creating a new Cloud Bigtable instance is extraneous and not needed to export; you can upgrade in place for nodes, but the storage type cannot be changed.
+
+---
+> **Q. As part of your backup plan, you want to be able to restore snapshots of Compute Engine instances using the fewest steps. **
+
+A. Export the snapshots to Cloud Storage. Create disks from the exported snapshot files. Create images from the new disks.
+
+B. Export the snapshots to Cloud Storage. Create images from the exported snapshot files.
+
+C. Use the snapshots to create replacement disks. Use the disks to create instances as needed.
+
+**D.** Use the snapshots to create replacement instances as needed.
+
+---
+**Correct. D.** This is correct because the scenario asks how to recreate instances. You can create an instance directly from a snapshot without restoring to disk first.
+
+---
+> **Q. You want to minimize costs to run Google Data Studio reports on BigQuery queries by using prefetch caching.**
+
+A. Set up the report to use the Owner's credentials to access the underlying data in BigQuery, and direct the users to view the report only once per business day (24-hour period).
+
+B. Set up the report to use the Owner's credentials to access the underlying data in BigQuery, and verify that the 'Enable cache' checkbox is selected for the report.
+
+**Not C.** Set up the report to use the Viewer's credentials to access the underlying data in BigQuery, and also set it up to be a 'view-only' report.
+
+**Not D.** Set up the report to use the Viewer's credentials to access the underlying data in BigQuery, and verify that the 'Enable cache' checkbox is not selected for the report.
+
+---
+**Not C-D.** This is not correct because a cache auto-expires every 12 hours; a prefetch cache is only for data sources that use the Owner's credentials (not the Viewer's credentials).
+
+---
+> **Q. A Data Analyst is concerned that a BigQuery query could be too expensive.**
+
+A. Use the LIMIT clause to limit the number of values in the results.
+
+**B.** Use the SELECT clause to limit the amount of data in the query. Partition data by date so the query can be more focused.
+
+C. Set the Maximum Bytes Billed, which will limit the number of bytes processed but still run the query if the number of bytes requested goes over the limit.
+
+D. Use GROUP BY so the results will be grouped into fewer output values.
+
+---
+**Correct B.** This is correct. SELECT limits the input data.
+
+---
+> **Q. BigQuery data is stored in external CSV files in Cloud Storage; as the data has increased, the query performance has dropped.**
+
+A. Import the data into BigQuery for better performance.
+
+B. Request more slots for greater capacity to improve performance.
+
+**Not C.** Divide the data into partitions based on date.
+
+D. Time to move to Cloud Bigtable; it is faster in all cases.
+
+---
+**Not C.** This might improve performance by focusing the query to a date-range if the data was already imported into a dataset.
+
+---
+> **Q. Source data is streamed in bursts and must be transformed before use.**
+
+A. Use Cloud Bigtable for fast input and cbt for ETL.
+
+B. Ingest data to Cloud Storage. Use Dataproc for ETL.
+
+C. Use Pub/Sub to buffer the data, and then use BigQuery for ETL.
+
+D. Use Pub/Sub to buffer the data, and then use Dataflow for ETL.
+
+---
+**Correct D.** This is correct because the unpredictable data requires a buffer
 
 ---
