@@ -18,12 +18,16 @@ D. Store in Cloud Storage. Link data as permanent tables in BigQuery and turn on
 > **Q. Low-cost one-way one-time migration of two 100-TB file servers to Google Cloud; data will be frequently accessed and only from Germany.**
 
 A. Use Transfer Appliance. Transfer to a Cloud Storage Standard bucket.  
+
 B. Use Transfer Appliance. Transfer to a Cloud Storage Nearline bucket.  
+
 **Not C.** Use Storage Transfer Service. Transfer to a Cloud Storage Standard bucket.  
+
 **Not D.** Use Storage Transfer Service. Transfer to a Cloud Storage Coldline bucket.  
 
 ---
-**Not C-D.** This is not correct because you should only use Transfer Service for a one-time one-way transfer. Also, Storage Transfer Service does not work for data stored on-premises.
+**Not C-D.** This is not correct because you should only use Transfer Service for a one-time one-way transfer. Also, Storage Transfer Service does not work for data stored on-premises.  
+**Correct A.** This is correct because you are performing a one-time (rather than an ongoing series) data transfer from on-premises to Google Cloud for users in a single region (Germany). Using a Standard storage bucket is best for data that is frequently accessed, will reduce cost and also conform to regulatory requirements.
 
 ---
 > **Q. Cost-effective backup to Google Cloud of multi-TB databases from another cloud including monthly DR drills.**
@@ -32,12 +36,13 @@ A. Use Transfer Appliance. Transfer to Cloud Storage Nearline bucket.
 
 B. Use Transfer Appliance. Transfer to Cloud Storage Coldline bucket.
 
-**Possible C.** Use Storage Transfer Service. Transfer to Cloud Storage Nearline bucket.
+C. Use Storage Transfer Service. Transfer to Cloud Storage Nearline bucket.
 
 **Not D.** Use Storage Transfer Service. Transfer to Cloud Storage Coldline bucket.
 
 ---
-**Not D**. This is not correct because you should not use Coldline if you want to access the files monthly.
+**Correct C.** This is correct because you will need to access your backup data monthly to test your disaster recovery process, so you should use a Nearline bucket; also because you will be performing ongoing, regular data transfers, so you should use Storage Transfer Service.
+**Not D**. This is not correct because you should not use Coldline if you want to access the files monthly.  
 
 ---
 > **Q. 250,000 devices produce a JSON device status every 10 seconds. How do you capture event data for outlier time series analysis?**
@@ -65,6 +70,7 @@ C. Use Cloud Storage. Write a Dataprep job to split the data into partitioned ta
 D. Use Cloud Bigtable. Design short and wide tables, and use a new column for each single event version.
 
 ---
+**Not C.** This is not correct because you do not need to use Google Cloud Storage for this scenario. It might be cheaper for storage, but not for processing. 
 **Correct. B.** This is correct because it is a recommended best practice. Use Cloud Bigtable and this schema for this scenario. Cloud Storage would have cheaper STORAGE costs than Cloud Bigtable, but we want to minimize QUERY costs.
 
 ---
@@ -94,6 +100,7 @@ D. Use a Google Kubernetes Engine cluster to host your model. Monitor the status
 
 ---
 **Not A.**  This is not correct because you should not use the Operation object to monitor failures.
+**Correct B.** This is correct because of the requirement to host an ML DNN. AI Platform for Tensorflow can handle DNNs. Google recommends monitoring Jobs, not Operations.
 
 ---
 
@@ -122,6 +129,7 @@ C. Export the data from your current Cloud Bigtable instance to Cloud Storage. C
 **Not D.** Export the data from your current Cloud Bigtable instance to Cloud Storage. Create a new Cloud Bigtable Production instance type with at least 3 nodes. Select the SSD storage type. Import the data into the new instance from Cloud Storage.
 
 ---
+**Correct B.** This is correct because Cloud Bigtable allows you to 'scale in place,' which meets your requirements for this scenario.
 **Not D.** This is not correct because creating a new Cloud Bigtable instance is extraneous and not needed to export; you can upgrade in place for nodes, but the storage type cannot be changed.
 
 ---
@@ -150,6 +158,7 @@ B. Set up the report to use the Owner's credentials to access the underlying dat
 **Not D.** Set up the report to use the Viewer's credentials to access the underlying data in BigQuery, and verify that the 'Enable cache' checkbox is not selected for the report.
 
 ---
+**Correct B.** This is correct because you must set Owner credentials to use the 'enable cache' option in BigQuery. It is also a Google best practice to use the ‘enable cache’ option when the business scenario calls for using prefetch caching. 1) Report must use Owner's Credentials. 2) You don't need to tell the users not to use the report, you need to tell the system to use Query and Pre-fetch caching to cut down on BigQuery jobs.
 **Not C-D.** This is not correct because a cache auto-expires every 12 hours; a prefetch cache is only for data sources that use the Owner's credentials (not the Viewer's credentials).
 
 ---
@@ -171,13 +180,14 @@ D. Use GROUP BY so the results will be grouped into fewer output values.
 
 A. Import the data into BigQuery for better performance.
 
-B. Request more slots for greater capacity to improve performance.
+**Not B.** Request more slots for greater capacity to improve performance.
 
 **Not C.** Divide the data into partitions based on date.
 
 D. Time to move to Cloud Bigtable; it is faster in all cases.
 
 ---
+**Not B.** This is incorrect because a slot is a measure of processing power, and the bottleneck is in the data access, not the data processing.
 **Not C.** This might improve performance by focusing the query to a date-range if the data was already imported into a dataset.
 
 ---
@@ -234,6 +244,7 @@ C. Instance high availability configuration
 **Not D.** Replicate from an external server
 
 ---
+**Correct B.** This is correct. A read replica will increase the availability of the service and can be located closer to the users in the new geographies.
 **Not D.** This feature replicates from an existing MySQL server IN to a Cloud SQL service. So that would not help in this circumstance.
 
 ---
@@ -248,6 +259,7 @@ C. Customer-Supplied Encryption Keys (CSEK)
 **Not D.** Customer Managed Encryption Keys (CMEK)
 
 ---
+**Correct B.** This is correct. The requirement is that the file cannot be decrypted in the cloud, so encrypt it before it is uploaded and after it is downloaded adds a layer of encryption.
 **Not D.** Not correct. The file can still be decrypted while hosted in the cloud.
 
 ---
@@ -292,6 +304,7 @@ C. IoT Core, Pub/Sub
 D. App Engine, IoT Core
 
 ---
+**Not A.** This is not correct because IoT Core does not publish to other services and it doesn't store data.
 **Not B.** This is not correct because Pub/Sub does not do device management.
 
 ---
@@ -299,13 +312,14 @@ D. App Engine, IoT Core
 
 A. Implement a high-throughput Cloud VPN connection
 
-B. Cloud Router with VPN
+**Not B.** Cloud Router with VPN
 
 **Not C.** Dedicated Interconnect
 
 D. Partner Interconnect
 
 ---
+**Not B.** This is not correct. Cloud Router is a form of network route discovery using BGP and is not relevant to the requirements.
 **Not C.** This is not correct. Direct Interconnect is useful for data from 10 Gbps to 80 Gbps. An ISP could offer a 99% SLA, but the max 9 Gbps requirement means this solution would not be optimal.
 
 ---
