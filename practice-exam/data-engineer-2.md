@@ -17,9 +17,9 @@ D. Store in Cloud Storage. Link data as permanent tables in BigQuery and turn on
 ---
 > **Q. Low-cost one-way one-time migration of two 100-TB file servers to Google Cloud; data will be frequently accessed and only from Germany.**
 
-**Possible A.** Use Transfer Appliance. Transfer to a Cloud Storage Standard bucket.
+A. Use Transfer Appliance. Transfer to a Cloud Storage Standard bucket.
 
-**Possible B.** Use Transfer Appliance. Transfer to a Cloud Storage Nearline bucket.
+B. Use Transfer Appliance. Transfer to a Cloud Storage Nearline bucket.
 
 **Not C.** Use Storage Transfer Service. Transfer to a Cloud Storage Standard bucket.
 
@@ -77,7 +77,7 @@ A. BigQuery
 
 B. Dataflow
 
-**C.** Dataproc
+C. Dataproc
 
 D. Dataprep
 
@@ -106,7 +106,7 @@ A. Set up a cluster in high availability mode with high-memory machine types. Ad
 
 B. Set up a cluster in high availability mode with default machine types. Add 10 additional preemptible worker nodes.
 
-**C.** Set up a cluster in standard mode with high-memory machine types. Add 10 additional preemptible worker nodes.
+C. Set up a cluster in standard mode with high-memory machine types. Add 10 additional preemptible worker nodes.
 
 D. Set up a cluster in standard mode with the default machine types. Add 10 additional local SSDs.
 
@@ -136,7 +136,7 @@ B. Export the snapshots to Cloud Storage. Create images from the exported snapsh
 
 C. Use the snapshots to create replacement disks. Use the disks to create instances as needed.
 
-**D.** Use the snapshots to create replacement instances as needed.
+D. Use the snapshots to create replacement instances as needed.
 
 ---
 **Correct. D.** This is correct because the scenario asks how to recreate instances. You can create an instance directly from a snapshot without restoring to disk first.
@@ -160,7 +160,7 @@ B. Set up the report to use the Owner's credentials to access the underlying dat
 
 A. Use the LIMIT clause to limit the number of values in the results.
 
-**B.** Use the SELECT clause to limit the amount of data in the query. Partition data by date so the query can be more focused.
+B. Use the SELECT clause to limit the amount of data in the query. Partition data by date so the query can be more focused.
 
 C. Set the Maximum Bytes Billed, which will limit the number of bytes processed but still run the query if the number of bytes requested goes over the limit.
 
@@ -196,5 +196,89 @@ D. Use Pub/Sub to buffer the data, and then use Dataflow for ETL.
 
 ---
 **Correct D.** This is correct because the unpredictable data requires a buffer
+
+---
+> **Q. Calculate a running average on streaming data that can arrive late and out of order.**
+
+A. Use Pub/Sub and Dataflow with Sliding Time Windows.
+
+B. Use Pub/Sub and Google Data Studio.
+
+C. Pub/Sub can guarantee timely arrival and order.
+
+D. Use Dataflow's built-in timestamps for ordering and filtering.
+
+---
+**Correct A.** This is correct because together, Pub/Sub and Dataflow can provide a solution.
+
+---
+> **Q. Testing a Machine Learning model with validation data returns 100% correct answers.**
+
+A. The model is working extremely well, indicating the hyperparameters are set correctly.
+
+B. The model is overfit. There is a problem.
+
+C. The model is underfit. There is a problem.
+
+D. The model is perfectly fit. You do not need to continue training.
+
+---
+**Correct B.** This is correct. The 100% accuracy is an indicator that the validation data may have somehow gotten mixed in with the training data. You will need new validation data to generate recognizable error.
+
+---
+> **Q. A client is using Cloud SQL database to serve infrequently changing lookup tables that host data used by applications. The applications will not modify the tables. As they expand into other geographic regions they want to ensure good performance. What do you recommend?**
+
+A. Migrate to Cloud Spanner
+
+B. Read replicas
+
+C. Instance high availability configuration
+
+**Not D.** Replicate from an external server
+
+---
+**Not D.** This feature replicates from an existing MySQL server IN to a Cloud SQL service. So that would not help in this circumstance.
+
+---
+> **Q. A client wants to store files from one location and retrieve them from another location. Security requirements are that no one should be able to access the contents of the file while it is hosted in the cloud. What is the best option?**
+
+A. Default encryption should be sufficient
+
+B. Client-side encryption
+
+C. Customer-Supplied Encryption Keys (CSEK)
+
+**Not D.** Customer Managed Encryption Keys (CMEK)
+
+---
+**Not D.** Not correct. The file can still be decrypted while hosted in the cloud.
+
+---
+> **Q. Three Google Cloud services commonly used together in data engineering solutions. (Described in this course).**
+
+A. Dataproc, Cloud SQL, BigQuery
+
+B. Pub/Sub, Dataflow, BigQuery
+
+C. Pub/Sub,Google Kubernetes Engine, Spanner
+
+D. Bigtable, Dataproc, Cloud Spanner
+
+---
+**Correct B.** Pub/Sub provides messaging, Dataflow is used for ETL and data transformation, and BigQuery is used for interactive queries.
+
+---
+> **Q. What is AVRO used for?**
+
+A. Serialization and de-serialization of data so that it can be transmitted and stored while maintaining an object structure.
+
+B. AVRO is an encryption method. AVRO-256 is a 256-bit key standard.
+
+C. AVRO is a file type usually specified with *.avr and a common format for spreadsheets.
+
+D. AVRO is a numerical type in SQL that stores a 38 digit value with 9 digit decimal representation. It avoids rounding errors in financial calculations.
+
+---
+**Correct A.** AVRO is a serialization / de-serialization standard.
 
 ---
