@@ -99,3 +99,18 @@ D. Use a Google Kubernetes Engine cluster to host your model. Monitor the status
 **A.**  This is not correct because you should not use the Operation object to monitor failures.
 
 ---
+
+> **Q. Cost-effective way to run non-critical Apache Spark jobs on Dataproc?**
+
+A. Set up a cluster in high availability mode with high-memory machine types. Add 10 additional local SSDs.
+
+B. Set up a cluster in high availability mode with default machine types. Add 10 additional preemptible worker nodes.
+
+**C.** Set up a cluster in standard mode with high-memory machine types. Add 10 additional preemptible worker nodes.
+
+D. Set up a cluster in standard mode with the default machine types. Add 10 additional local SSDs.
+
+---
+**Correct. C.** This is correct because Spark and high-memory machines only need the standard mode. Also, use preemptible nodes because you want to save money and this is not mission-critical.
+
+---
