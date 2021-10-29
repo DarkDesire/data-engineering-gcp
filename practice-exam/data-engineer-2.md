@@ -1,7 +1,7 @@
 Data Engineer Practice Exam
 ===========================
 
-> Q. Storage of JSON files with occasionally changing schema, for ANSI SQL queries.
+> **Q. Storage of JSON files with occasionally changing schema, for ANSI SQL queries.**
 
 A. Store in BigQuery. Provide format files for data load and update them as needed.
 
@@ -15,7 +15,7 @@ D. Store in Cloud Storage. Link data as permanent tables in BigQuery and turn on
 **Correct. B.** This is correct because of the requirement to support occasionally (schema) changing JSON files and aggregate ANSI SQL queries: you need to use BigQuery, and it is quickest to use 'Automatically detect' for schema changes.
 
 ---
-> Q. Low-cost one-way one-time migration of two 100-TB file servers to Google Cloud; data will be frequently accessed and only from Germany.
+> **Q. Low-cost one-way one-time migration of two 100-TB file servers to Google Cloud; data will be frequently accessed and only from Germany.**
 
 **Possible A.** Use Transfer Appliance. Transfer to a Cloud Storage Standard bucket.
 
@@ -29,7 +29,7 @@ D. Store in Cloud Storage. Link data as permanent tables in BigQuery and turn on
 **C-D.** This is not correct because you should only use Transfer Service for a one-time one-way transfer. Also, Storage Transfer Service does not work for data stored on-premises.
 
 ---
-> Q. Cost-effective backup to Google Cloud of multi-TB databases from another cloud including monthly DR drills.
+> **Q. Cost-effective backup to Google Cloud of multi-TB databases from another cloud including monthly DR drills.**
 
 A. Use Transfer Appliance. Transfer to Cloud Storage Nearline bucket.
 
@@ -43,7 +43,7 @@ B. Use Transfer Appliance. Transfer to Cloud Storage Coldline bucket.
 **D**. This is not correct because you should not use Coldline if you want to access the files monthly.
 
 ---
-> Q. 250,000 devices produce a JSON device status every 10 seconds. How do you capture event data for outlier time series analysis? 
+> **Q. 250,000 devices produce a JSON device status every 10 seconds. How do you capture event data for outlier time series analysis?**
 
 A. Capture data in BigQuery. Develop a BigQuery API custom application to query the dataset and display device outlier data.
 
@@ -57,7 +57,7 @@ D. Capture data in Cloud Bigtable. Install and use the HBase shell for Cloud Big
 **Correct. C.** This is correct because the data type, volume, and query pattern best fit Cloud Bigtable capabilities.
 
 ---
->Q. Event data in CSV format to be queried for individual values over time windows. Which storage and schema to minimize query costs?
+> **Q. Event data in CSV format to be queried for individual values over time windows. Which storage and schema to minimize query costs?**
 
 A. Use Cloud Storage. Join the raw file data with a BigQuery log table.
 
