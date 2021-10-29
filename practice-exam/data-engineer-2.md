@@ -71,7 +71,7 @@ D. Use Cloud Bigtable. Design short and wide tables, and use a new column for ea
 **Correct. B.** This is correct because it is a recommended best practice. Use Cloud Bigtable and this schema for this scenario. Cloud Storage would have cheaper STORAGE costs than Cloud Bigtable, but we want to minimize QUERY costs.
 
 ---
-> Q. Customer wants to maintain investment in an existing Apache Spark code data pipeline.
+> **Q. Customer wants to maintain investment in an existing Apache Spark code data pipeline.**
 
 A. BigQuery
 
@@ -83,5 +83,19 @@ D. Dataprep
 
 ---
 **Correct. C.** This is correct because Dataproc is a managed Hadoop service and runs Apache Spark applications.
+
+---
+> **Q. Host a deep neural network machine learning model on Google Cloud. Run and monitor jobs that could occasionally fail.**
+
+**Not A.** Use AI Platform to host your model. Monitor the status of the Operation object for 'error' results.
+
+B. Use AI Platform to host your model. Monitor the status of the Jobs object for 'failed' job states.
+
+C. Use a Google Kubernetes Engine cluster to host your model. Monitor the status of the Jobs object for 'failed' job states.
+
+D. Use a Google Kubernetes Engine cluster to host your model. Monitor the status of the Operation object for 'error' results.
+
+---
+**A.**  This is not correct because you should not use the Operation object to monitor failures.
 
 ---
