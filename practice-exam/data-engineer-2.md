@@ -43,3 +43,45 @@ B. Use Transfer Appliance. Transfer to Cloud Storage Coldline bucket.
 **D**. This is not correct because you should not use Coldline if you want to access the files monthly.
 
 ---
+> Q. 250,000 devices produce a JSON device status every 10 seconds. How do you capture event data for outlier time series analysis? 
+
+A. Capture data in BigQuery. Develop a BigQuery API custom application to query the dataset and display device outlier data.
+
+B.Capture data in BigQuery. Use the BigQuery console to query the dataset and display device outlier data.
+
+C. Capture data in Cloud Bigtable. Use the Cloud Bigtable cbt tool to display device outlier data.
+
+D. Capture data in Cloud Bigtable. Install and use the HBase shell for Cloud Bigtable to query the table for device outlier data.
+
+---
+**Correct. C.** This is correct because the data type, volume, and query pattern best fit Cloud Bigtable capabilities.
+
+---
+>Q. Event data in CSV format to be queried for individual values over time windows. Which storage and schema to minimize query costs?
+
+A. Use Cloud Storage. Join the raw file data with a BigQuery log table.
+
+B. Use Cloud Bigtable. Design tall and narrow tables, and use a new row for each single event version.
+
+C. Use Cloud Storage. Write a Dataprep job to split the data into partitioned tables.
+
+D. Use Cloud Bigtable. Design short and wide tables, and use a new column for each single event version.
+
+---
+**Correct. B.** This is correct because it is a recommended best practice. Use Cloud Bigtable and this schema for this scenario. Cloud Storage would have cheaper STORAGE costs than Cloud Bigtable, but we want to minimize QUERY costs.
+
+---
+> Q. Customer wants to maintain investment in an existing Apache Spark code data pipeline.
+
+A. BigQuery
+
+B. Dataflow
+
+C. Dataproc
+
+D. Dataprep
+
+---
+**Correct. C.** This is correct because Dataproc is a managed Hadoop service and runs Apache Spark applications.
+
+---
