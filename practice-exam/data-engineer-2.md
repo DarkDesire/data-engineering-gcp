@@ -17,13 +17,10 @@ D. Store in Cloud Storage. Link data as permanent tables in BigQuery and turn on
 ---
 > **Q. Low-cost one-way one-time migration of two 100-TB file servers to Google Cloud; data will be frequently accessed and only from Germany.**
 
-A. Use Transfer Appliance. Transfer to a Cloud Storage Standard bucket.
-
-B. Use Transfer Appliance. Transfer to a Cloud Storage Nearline bucket.
-
-**Not C.** Use Storage Transfer Service. Transfer to a Cloud Storage Standard bucket.
-
-**Not D.** Use Storage Transfer Service. Transfer to a Cloud Storage Coldline bucket.
+A. Use Transfer Appliance. Transfer to a Cloud Storage Standard bucket.  
+B. Use Transfer Appliance. Transfer to a Cloud Storage Nearline bucket.  
+**Not C.** Use Storage Transfer Service. Transfer to a Cloud Storage Standard bucket.  
+**Not D.** Use Storage Transfer Service. Transfer to a Cloud Storage Coldline bucket.  
 
 ---
 **Not C-D.** This is not correct because you should only use Transfer Service for a one-time one-way transfer. Also, Storage Transfer Service does not work for data stored on-premises.
@@ -280,5 +277,77 @@ D. AVRO is a numerical type in SQL that stores a 38 digit value with 9 digit dec
 
 ---
 **Correct A.** AVRO is a serialization / de-serialization standard.
+
+---
+> **Q. A company has a new IoT pipeline. Which services will make this design work? Select the services that should be used to replace the icons with the number "1" and number "2" in the diagram.**
+
+![iot.png](iot.png)
+
+A. IoT Core, Datastore
+
+**Not B.** Pub/Sub, Storage
+
+C. IoT Core, Pub/Sub
+
+D. App Engine, IoT Core
+
+---
+**Not B.** This is not correct because Pub/Sub does not do device management.
+
+---
+> **Q. A company wants to connect cloud applications to an Oracle database in its data center. Requirements are a maximum of 9 Gbps of data and a Service Level Agreement (SLA) of 99%.**
+
+A. Implement a high-throughput Cloud VPN connection
+
+B. Cloud Router with VPN
+
+**Not C.** Dedicated Interconnect
+
+D. Partner Interconnect
+
+---
+**Not C.** This is not correct. Direct Interconnect is useful for data from 10 Gbps to 80 Gbps. An ISP could offer a 99% SLA, but the max 9 Gbps requirement means this solution would not be optimal.
+
+---
+> **Q. A client has been developing a pipeline based on PCollections using local programming techniques and is ready to scale up to production. What should they do?**
+
+A. They should use the Dataflow Cloud Runner.
+
+B. They should upload the pipeline to Dataproc.
+
+C. They should use the local version of runner.
+
+D. Import the pipeline into BigQuery.
+
+---
+**Correct A.** This is correct. The PCollection indicates it is a Dataflow pipeline. And the Cloud Runner will enable the pipeline to scale to production levels.
+
+---
+> **Q. A company has migrated their Hadoop cluster to the cloud and is now using  Dataproc with the same settings and same methods as in the data center. What would you advise them to do to make better use of the cloud environment?**
+
+A. Upgrade to the latest version of HDFS. Change the settings in Hadoop components to optimize for the different kinds of work in the mix.
+
+B. Find more jobs to run so the cluster utilizations will cost-justify the expense.
+
+C. Store persistent data off-cluster. Start a cluster for one kind of work then shut it down when it is not processing data.
+
+D. Migrate from Dataproc to an open source Hadoop Cluster hosted on Compute Engine, because this is the only way to get all the Hadoop customizations needed for efficiency.
+
+---
+**Correct C.** This is correct. Storing persistent data off the cluster allows the cluster to be shut down when not processing data. And it allows separate clusters to be started per job or per kind of work, so tuning is less important.
+
+---
+> **Q. An application has the following data requirements. 1. It requires strongly consistent transactions. 2. Total data will be less than 500 GB. 3. The data does not need to be streaming or real time. Which data technology would fit these requirements?**
+
+A. BigQuery
+
+B. Cloud Bigtable
+
+C. Cloud SQL
+
+D. Memorystore
+
+---
+**Correct C.** This is correct. Cloud SQL supports strongly consistent transactions. And the size requirements will fit with a Cloud SQL instance.
 
 ---
